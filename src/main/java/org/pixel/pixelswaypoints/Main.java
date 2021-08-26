@@ -90,7 +90,12 @@ public final class Main extends JavaPlugin {
                     p.sendMessage("- " + key);
                 }
             } else if(args[0].equals(("help"))) {
-                p.sendMessage(ChatColor.GREEN + "Syntax: /waypoint <set|delete|get|list> <name>");
+                p.sendMessage(ChatColor.GREEN + "Syntax: /waypoint <set|delete|get|list> <name>\n" +
+                        "/waypoint set <name>\n" +
+                        "/waypoint delete <name>\n" +
+                        "/waypoint get <name>\n" +
+                        "/waypoint list\n" +
+                        "/waypoint help ");
             } else {
                 p.sendMessage(ChatColor.RED + config.getString("error_no_subcommand"));
                 p.sendMessage(ChatColor.RED + "Syntax: /waypoint <set|delete|get|list> <name>");

@@ -6,6 +6,6 @@ authors: [ PixelAgent007 ]
 
 commands:
   waypoint:
-    description: Erstelle / Lösche / Frage ab / Liste Waypoints
+    description: Save / Delete / Get / List Waypoints
     usage: /waypoint <set|delete|get|list> <name>
     aliases: [wp, pos, position, waypoints]
