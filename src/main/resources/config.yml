@@ -1,0 +1,10 @@
+error_onlyplayers: "Dieser Befehl kann nur von Spielern ausgeführt werden!"
+error_no_subcommand: "Dieser Befehl existiert nicht!"
+error_no_waypoint: "Dieser Waypoint existiert nicht!"
+
+delete_success: "Waypoint löschen erfolgreich!"
+create_success: "Waypoint erstellen erfolgreich!"
+
+world: "Welt"
+created_by: "Erstellt von"
+existing_waypoints: "Bestehende Waypoints"

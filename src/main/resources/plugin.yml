@@ -1,0 +1,11 @@
+name: PixelsWaypoints
+version: '${version}'
+main: org.pixel.pixelswaypoints.Main
+api-version: 1.17
+authors: [ PixelAgent007 ]
+
+commands:
+  waypoint:
+    description: Erstelle / Lösche / Frage ab / Liste Waypoints
+    usage: /waypoint <set|delete|get|list> <name>
+    aliases: [wp, pos, position, waypoints]
