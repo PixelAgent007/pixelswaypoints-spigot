@@ -1,3 +1,4 @@
+# Messages
 error_onlyplayers: "Dieser Befehl kann nur von Spielern ausgeführt werden!"
 error_no_subcommand: "Dieser Befehl existiert nicht!"
 error_no_waypoint: "Dieser Waypoint existiert nicht!"
