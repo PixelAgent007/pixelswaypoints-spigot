@@ -25,3 +25,7 @@ Spigot / Bukkit / Paper.
 **Releases**:<br>
 Releases can be found on [GitHub](https://github.com/PixelAgent007/pixelswaypoints-spigot) and on the Plugins Spigot Page.
 
+## Changelog 
+
+- v 1.0.5
+You can now only list, get, and delete your own waypoints (controlled by uuid, may or may not work in offline-mode)
