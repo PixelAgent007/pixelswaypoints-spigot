@@ -14,8 +14,9 @@ Spigot / Bukkit / Paper.
 
 **Syntax**:
 ```
-/waypoint <set|delete|get|list> <name>
+/waypoint <set|setPos|delete|get|list> <name>
 /waypoint set <name>
+/waypoint setPos <x> <y> <z> <name>
 /waypoint delete <name>
 /waypoint get <name>
 /waypoint list
@@ -29,3 +30,6 @@ Releases can be found on [GitHub](https://github.com/PixelAgent007/pixelswaypoin
 
 - v 1.0.5
 You can now only list, get, and delete your own waypoints (controlled by uuid, may or may not work in offline-mode)
+
+- v 1.0.6
+Added the setPos command

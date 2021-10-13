@@ -1,6 +1,5 @@
 package org.pixel.pixelswaypoints.listener;
 
-import org.bukkit.ChatColor;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -10,11 +9,11 @@ import org.pixel.pixelswaypoints.Main;
 
 import java.io.File;
 
-public class JoinListener implements Listener {
 
+public class JoinListener implements Listener {
     // Loading Data
     Main main = new Main();
-    File f = new File(main.getDataFolder(), "waypoints.yml");
+    File f = new File(main.getDataFolder(), "config.yml");
     YamlConfiguration data = YamlConfiguration.loadConfiguration(f);
 
     @EventHandler
