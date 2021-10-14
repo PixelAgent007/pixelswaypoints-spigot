@@ -33,3 +33,6 @@ You can now only list, get, and delete your own waypoints (controlled by uuid, m
 
 - v 1.0.6
 Added the setPos command
+
+- v 1.0.7
+Fixed a bug where Players weren't able to execute the commands
