@@ -12,19 +12,28 @@ import org.bukkit.plugin.java.JavaPlugin;
 import org.pixel.pixelswaypoints.listener.JoinListener;
 
 import java.io.File;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.sql.ResultSet;
+import java.sql.Statement;
 
 public class Main extends JavaPlugin {
+
     // Registering listeners
     public void registerEvents() {
         PluginManager pm = Bukkit.getServer().getPluginManager();
-        pm.registerEvents(new JoinListener(), this);
+        pm.registerEvents(new JoinListener(this), this);
     }
 
     @Override
     public void onEnable() {
+
+        final JoinListener other = new JoinListener(this);
+
         // Getting config + waypoints
         File f = new File(this.getDataFolder(), "config.yml");
-        File f2 =new File(this.getDataFolder(), "waypoints.yml");
+        File f2 = new File(this.getDataFolder(), "waypoints.yml");
         YamlConfiguration config = YamlConfiguration.loadConfiguration(f);
         YamlConfiguration data = YamlConfiguration.loadConfiguration(f2);
 

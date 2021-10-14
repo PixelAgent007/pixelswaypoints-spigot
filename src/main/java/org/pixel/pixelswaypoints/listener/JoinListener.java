@@ -12,8 +12,12 @@ import java.io.File;
 
 public class JoinListener implements Listener {
     // Loading Data
-    Main main = new Main();
-    File f = new File(main.getDataFolder(), "config.yml");
+    private Main main;
+    public JoinListener(Main main) {
+        this.main = main;
+    }
+
+    File f = new File(main.getDataFolder(), "waypoints.yml");
     YamlConfiguration data = YamlConfiguration.loadConfiguration(f);
 
     @EventHandler

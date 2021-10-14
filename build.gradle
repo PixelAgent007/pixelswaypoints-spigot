@@ -19,6 +19,7 @@ repositories {
 
 dependencies {
     compileOnly 'org.spigotmc:spigot-api:1.17-R0.1-SNAPSHOT'
+    compileClasspath 'org.xerial:sqlite-jdbc:3.36.0.3'
 }
 
 def targetJavaVersion = 16
