@@ -9,34 +9,21 @@ import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.pixel.pixelswaypoints.config.ConfigHandler;
 import org.pixel.pixelswaypoints.listener.JoinListener;
-
-import java.io.File;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-import java.sql.ResultSet;
-import java.sql.Statement;
 
 public class Main extends JavaPlugin {
 
-    // Registering listeners
-    public void registerEvents() {
-        PluginManager pm = Bukkit.getServer().getPluginManager();
-        pm.registerEvents(new JoinListener(this), this);
-    }
+    // Instancing Classes
+    private final ConfigHandler ch = new ConfigHandler(this);
+    private final JoinListener jl = new JoinListener(this);
+
+    // Getting config + waypoints
+    private YamlConfiguration config = ch.getConfig();
+    private YamlConfiguration data = ch.getData();
 
     @Override
     public void onEnable() {
-
-        final JoinListener other = new JoinListener(this);
-
-        // Getting config + waypoints
-        File f = new File(this.getDataFolder(), "config.yml");
-        File f2 = new File(this.getDataFolder(), "waypoints.yml");
-        YamlConfiguration config = YamlConfiguration.loadConfiguration(f);
-        YamlConfiguration data = YamlConfiguration.loadConfiguration(f2);
-
         // Setting lang defaults
         if(!config.contains("error_onlyplayers")) {config.set("error_onlyplayers", "Dieser Befehl kann nur von Spielern ausgeführt werden!");}
         if(!config.contains("error_no_subcommand")) {config.set("error_no_subcommand", "Dieser Befehl existiert nicht!");}
@@ -51,11 +38,12 @@ public class Main extends JavaPlugin {
         if(!data.contains("waypoints")) {data.set("waypoints", null);}
 
         // Saving config
-        try {config.save(f);} catch (Exception e) {e.printStackTrace();}
-        try {data.save(f2);} catch (Exception e) {e.printStackTrace();}
+        ch.saveConfig();
+        ch.saveData();
 
-        // Calling Event register method
-        registerEvents();
+        // Registering Events
+        PluginManager pm = Bukkit.getServer().getPluginManager();
+        pm.registerEvents(jl, this);
     }
 
     @Override
@@ -64,18 +52,10 @@ public class Main extends JavaPlugin {
     }
 
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-        // Loading config
-        File f2 = new File(this.getDataFolder(), "config.yml");
-        YamlConfiguration config = YamlConfiguration.loadConfiguration(f2);
-
         if (!(sender instanceof Player)) {
             sender.sendMessage(ChatColor.RED + config.getString("error_onlyplayers"));
             return false;
         }
-
-        // Getting waypoints
-        File f = new File(this.getDataFolder(), "waypoints.yml");
-        YamlConfiguration data = YamlConfiguration.loadConfiguration(f);
 
         // Get coords + World
         Player p = (Player) sender;
@@ -118,11 +98,7 @@ public class Main extends JavaPlugin {
                 data.set("waypoints." + owner + "." + args[1] + ".y", y);
                 data.set("waypoints." + owner + "." + args[1] + ".z", z);
                 data.set("waypoints." + owner + "." + args[1] + ".world", world);
-                try {
-                    data.save(f2);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
+                ch.saveData();
                 p.sendMessage(ChatColor.GREEN + config.getString("create_success"));
             }
             case "setPos" -> {
@@ -136,11 +112,7 @@ public class Main extends JavaPlugin {
                 data.set("waypoints." + owner + "." + args[1] + ".y", args[2]);
                 data.set("waypoints." + owner + "." + args[1] + ".z", args[3]);
                 data.set("waypoints." + owner + "." + args[1] + ".world", world);
-                try {
-                    data.save(f2);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
+                ch.saveData();
                 p.sendMessage(ChatColor.GREEN + config.getString("create_success"));
             }
             case "delete" -> {
@@ -149,11 +121,7 @@ public class Main extends JavaPlugin {
                 }
                 if (data.contains("waypoints." + owner + "." + args[1])) {
                     data.set("waypoints." + owner + "." + args[1], null);
-                    try {
-                        data.save(f2);
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
+                    ch.saveData();
                     p.sendMessage(ChatColor.GREEN + config.getString("delete_success"));
                 } else {
                     p.sendMessage(ChatColor.RED + config.getString("error_no_waypoint"));
